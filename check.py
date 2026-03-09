@@ -74,8 +74,7 @@ def parse_instructions(html):
         # Collect groups that must report (not standby)
         if not is_standby:
             range_str = str(low) if low == high else f"{low}-{high}"
-            details = _extract_details(text)
-            called_groups.append((range_str, details))
+            called_groups.append(range_str)
 
         # Check if this blockquote covers our group
         if low <= GROUP <= high:
@@ -87,13 +86,7 @@ def parse_instructions(html):
 
     # Build the called-groups summary
     if called_groups:
-        called_lines = []
-        for range_str, details in called_groups:
-            if details:
-                called_lines.append(f"  Groups {range_str}: {details}")
-            else:
-                called_lines.append(f"  Groups {range_str}")
-        called_summary = "Called today:\n" + "\n".join(called_lines)
+        called_summary = "Called today: Groups " + ", ".join(called_groups)
     else:
         called_summary = "No groups called today."
 
