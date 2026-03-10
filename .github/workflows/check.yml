@@ -1,11 +1,6 @@
 name: Check jury duty status
 on:
-  schedule:
-    # 5:05 PM Pacific = 00:05 or 01:05 UTC next day (DST/standard)
-    # March 9-12 is during PDT (UTC-7), so 5:05 PM PDT = 00:05 UTC
-    # Run at both times to be safe — the script exits silently if past March 12
-    - cron: '5 0 10-13 3 *'
-  workflow_dispatch: {}
+  workflow_dispatch: {}  # triggered by cron-job.org at 5:05 PM PDT
 jobs:
   check:
     runs-on: ubuntu-latest
